@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,9 +23,17 @@ import com.example.restcountries.ui.theme.RestCountriesTheme
 import androidx.compose.runtime.getValue
 import com.example.restcountries.utils.Routes
 
+import androidx.lifecycle.viewmodel.compose.viewModel
+
 
 @Composable
 fun App(){
+
+    // Creates an instance of the CountriesVM that's tied to the lifecycle of the app
+    val viewModel: CountriesVM = viewModel()
+
+    // Gets the uiState from the view model and observes it
+    val uiState by viewModel.uiState.collectAsState()
 
     val navController: NavHostController = rememberNavController()
 
