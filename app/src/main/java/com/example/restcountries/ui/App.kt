@@ -20,10 +20,8 @@ import com.example.restcountries.ui.screens.CountriesListScreen
 import com.example.restcountries.ui.screens.CountryDetailsScreen
 import com.example.restcountries.ui.theme.RestCountriesTheme
 import androidx.compose.runtime.getValue
+import com.example.restcountries.utils.Routes
 
-enum class Routes(){
-    List, Country
-}
 
 @Composable
 fun App(){
@@ -33,7 +31,7 @@ fun App(){
     // Observes the back stack entry as a state
     val backStackEntry by navController.currentBackStackEntryAsState()
 
-    val title = if(backStackEntry?.destination?.route == "List") stringResource(R.string.app_name) else "Country"
+    val title = if(backStackEntry?.destination?.route == Routes.List.name) stringResource(R.string.app_name) else "Country"
 
     Scaffold(
         topBar = {
@@ -51,7 +49,7 @@ fun App(){
 
         NavHost(
             navController = navController,
-            startDestination = Routes.List.name,
+            startDestination = Routes.List,
             modifier = Modifier.padding(it)
         ) {
             composable(route = Routes.List.name){
