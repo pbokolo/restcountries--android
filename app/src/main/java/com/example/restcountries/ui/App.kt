@@ -24,6 +24,9 @@ import androidx.compose.runtime.getValue
 import com.example.restcountries.utils.Routes
 
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.restcountries.ui.screens.ErrorScreen
+import com.example.restcountries.ui.screens.LoadingScreen
+import com.example.restcountries.utils.DataLoadingStates
 
 
 @Composable
@@ -56,21 +59,30 @@ fun App(){
             .safeDrawingPadding()
     ) {
 
-        NavHost(
-            navController = navController,
-            startDestination = Routes.List,
-            modifier = Modifier.padding(it)
-        ) {
-            composable(route = Routes.List.name){
-                CountriesListScreen( onClick = {
-                    navController.navigate(Routes.Country.name)
-                })
+        when(uiState.dataLoadingState){
+            DataLoadingStates.Loading.name -> LoadingScreen()
+
+            DataLoadingStates.Ready.name -> NavHost(
+                navController = navController,
+                startDestination = Routes.List,
+                modifier = Modifier.padding(it)
+            ) {
+                composable(route = Routes.List.name){
+                    CountriesListScreen( onClick = {
+                        navController.navigate(Routes.Country.name)
+                    })
+                }
+
+                composable(route = Routes.Country.name){
+                    CountryDetailsScreen()
+                }
             }
 
-            composable(route = Routes.Country.name){
-                CountryDetailsScreen()
-            }
+            DataLoadingStates.Error.name -> ErrorScreen()
+
         }
+
+
 
     }
 
