@@ -64,7 +64,7 @@ fun App(){
 
             DataLoadingStates.Ready.name -> NavHost(
                 navController = navController,
-                startDestination = Routes.List,
+                startDestination = Routes.List.name,
                 modifier = Modifier.padding(it)
             ) {
                 composable(route = Routes.List.name){
