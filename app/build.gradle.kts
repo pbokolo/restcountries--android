@@ -54,6 +54,14 @@ dependencies {
 
     implementation ("androidx.navigation:navigation-compose:2.9.0")
 
+    // The following will help in defining interfaces for making http requests to api endpoints
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    // Tells retrofit how to converts data in json format into actual data model object
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
+    // Handles the actual http communication
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
+    // The core engine for serialization/deserialization.
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
