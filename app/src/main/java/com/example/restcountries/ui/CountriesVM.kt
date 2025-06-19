@@ -51,7 +51,10 @@ class CountriesVM(private val restCountriesRepo: RestCountriesRepository):  View
                 val countries = countriesDtos.map { it.toCountry() }
 
                 _uiState.update {
-                    it.copy(dataLoadingState = DataLoadingStates.Ready.name)
+                    it.copy(
+                        dataLoadingState = DataLoadingStates.Ready.name,
+                        countriesList = countries
+                    )
                 }
 
             }catch (e: IOException){
