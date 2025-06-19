@@ -1,5 +1,6 @@
 package com.example.restcountries.ui
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
@@ -43,19 +44,14 @@ class CountriesVM(private val restCountriesRepo: RestCountriesRepository):  View
 
     fun getCountries(){
         viewModelScope.launch {
+
             try {
-                // Set loading state before the delay
                 _uiState.update { it.copy(dataLoadingState = DataLoadingStates.Loading.name) }
 
                 val countriesDtos = restCountriesRepo.getAll()
                 val countries = countriesDtos.map { it.toCountry() }
 
-                _uiState.update {
-                    it.copy(
-                        dataLoadingState = DataLoadingStates.Ready.name,
-                        countriesList = countries
-                    )
-                }
+                _uiState.update { it.copy(dataLoadingState = DataLoadingStates.Ready.name, countriesList = countries) }
 
             }catch (e: IOException){
                 _uiState.update {
@@ -64,30 +60,16 @@ class CountriesVM(private val restCountriesRepo: RestCountriesRepository):  View
                         errorMessage = e.message.toString()
                     )
                 }
-            }catch (e: HttpException){
+                Log.d("Error", e.message.toString())
+            }catch (e: Exception){
                 _uiState.update {
                     it.copy(
                         dataLoadingState = DataLoadingStates.Error.name,
                         errorMessage = e.message.toString()
                     )
                 }
-            }catch (e: TimeoutCancellationException){
-                _uiState.update {
-                    it.copy(
-                        dataLoadingState = DataLoadingStates.Error.name,
-                        errorMessage = e.message.toString()
-                    )
-                }
+                Log.d("Error", e.message.toString())
             }
-            catch (e: Exception) {
-                _uiState.update {
-                    it.copy(
-                        dataLoadingState = DataLoadingStates.Error.name,
-                        errorMessage = e.message.toString()
-                    )
-                }
-            }
-
 
         }
 

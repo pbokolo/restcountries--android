@@ -10,11 +10,11 @@ import androidx.compose.ui.Modifier
 
 
 @Composable
-fun ErrorScreen(){
+fun ErrorScreen(message: String){
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center
     ) {
-        Text(text = "Error 🫣")
+        Text(text = message)
     }
 }

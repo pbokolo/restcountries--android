@@ -33,7 +33,7 @@ import com.example.restcountries.utils.DataLoadingStates
 fun App(){
 
     // Creates an instance of the CountriesVM that's tied to the lifecycle of the app
-    val viewModel: CountriesVM = viewModel()
+    val viewModel: CountriesVM = viewModel(factory = CountriesVM.Factory)
 
     // Gets the uiState from the view model and observes it
     val uiState by viewModel.uiState.collectAsState()
@@ -68,7 +68,7 @@ fun App(){
                 modifier = Modifier.padding(it)
             ) {
                 composable(route = Routes.List.name){
-                    CountriesListScreen( onClick = {
+                    CountriesListScreen(list = uiState.countriesList, onClick = {
                         navController.navigate(Routes.Country.name)
                     })
                 }
@@ -78,7 +78,7 @@ fun App(){
                 }
             }
 
-            DataLoadingStates.Error.name -> ErrorScreen()
+            DataLoadingStates.Error.name -> ErrorScreen(message = uiState.errorMessage)
 
         }
 
