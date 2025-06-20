@@ -11,15 +11,12 @@ import com.example.restcountries.RestCountriesApplication
 import com.example.restcountries.data.RestCountriesRepository
 import com.example.restcountries.model.toCountry
 import com.example.restcountries.utils.DataLoadingStates
-import kotlinx.coroutines.TimeoutCancellationException
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import okio.IOException
-import retrofit2.HttpException
 
 class CountriesVM(private val restCountriesRepo: RestCountriesRepository):  ViewModel(){
 
