@@ -1,7 +1,10 @@
 package com.example.restcountries.data
 
+import com.example.restcountries.model.Country
 import com.example.restcountries.model.CountryDto
 import com.example.restcountries.network.RestCountriesApiService
+
+val countries = listOf<Country>()
 
 interface RestCountriesRepository{
     suspend fun getAll(): List<CountryDto>
