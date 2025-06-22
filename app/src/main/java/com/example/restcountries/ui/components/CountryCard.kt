@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -21,9 +22,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.restcountries.R
+import com.example.restcountries.data.countries
 import com.example.restcountries.model.Country
+import com.example.restcountries.ui.theme.RestCountriesTheme
 import com.example.restcountries.utils.formatPopulation
 
 @Composable
@@ -32,13 +36,20 @@ fun CountryCard(country: Country, onClick: () -> Unit) {
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
         modifier = Modifier.clickable {
             onClick()
-        }.height(240.dp)
+        }.height(320.dp)
     ) {
-        Column(modifier = Modifier.fillMaxSize()) {
-            Box(modifier = Modifier.fillMaxWidth().weight(0.4f)){
+        Column( modifier = Modifier.fillMaxSize()) {
+            Box(modifier = Modifier.fillMaxWidth().weight(0.45f)){
             }
 
-            Column(modifier = Modifier.fillMaxWidth().weight(.6f)) {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.weight(.55f).padding(
+                    top = 8.dp,
+                    start = 16.dp,
+                    end = 8.dp,
+                    bottom = 8.dp)
+            ) {
                 Text(
                     text = country.name,
                     maxLines = 1,
@@ -73,6 +84,14 @@ fun CountryDetailText(text: String, @DrawableRes icon: Int, textStyle: TextStyle
             overflow = TextOverflow.Ellipsis,
             style = textStyle
         )
+    }
+}
+
+@Composable
+@Preview
+fun CountryCardPreview(){
+    RestCountriesTheme {
+        CountryCard(country = countries[0], onClick = {})
     }
 }
 
