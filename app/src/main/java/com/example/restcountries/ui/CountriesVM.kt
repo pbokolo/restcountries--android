@@ -72,4 +72,13 @@ class CountriesVM(private val restCountriesRepo: RestCountriesRepository):  View
 
     }
 
+    fun setSelectedCountry(index: Int){
+        val country = _uiState.value.countriesList[index]
+        _uiState.update {
+            it.copy(
+                selectedCountry = country
+            )
+        }
+    }
+
 }

@@ -68,13 +68,14 @@ fun App(){
                 modifier = Modifier.padding(it)
             ) {
                 composable(route = Routes.List.name){
-                    CountriesListScreen(list = uiState.countriesList, onClick = {
+                    CountriesListScreen(list = uiState.countriesList, onClick = { i ->
+                        viewModel.setSelectedCountry(i)
                         navController.navigate(Routes.Country.name)
                     })
                 }
 
                 composable(route = Routes.Country.name){
-                    CountryDetailsScreen()
+                    CountryDetailsScreen(country = uiState.selectedCountry)
                 }
             }
 

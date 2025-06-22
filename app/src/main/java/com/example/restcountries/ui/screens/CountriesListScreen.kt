@@ -15,7 +15,7 @@ import com.example.restcountries.ui.components.CountryCard
 import com.example.restcountries.ui.theme.RestCountriesTheme
 
 @Composable
-fun CountriesListScreen(list: List<Country>, onClick: () -> Unit){
+fun CountriesListScreen(list: List<Country>, onClick: (Int) -> Unit){
     LazyVerticalGrid(
         columns = GridCells.Adaptive(minSize = 160.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -23,7 +23,11 @@ fun CountriesListScreen(list: List<Country>, onClick: () -> Unit){
         modifier = Modifier.padding(start = 8.dp, end = 8.dp)
     ) {
         if(!list.isEmpty()){
-            itemsIndexed(list) { i, c -> CountryCard(country = c, onClick = onClick) }
+            itemsIndexed(list) { i, c -> CountryCard(
+                country = c,
+                onClick = { onClick(i) }
+            )
+            }
         }
     }
 }
