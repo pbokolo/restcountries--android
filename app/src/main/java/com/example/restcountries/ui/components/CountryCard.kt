@@ -44,7 +44,7 @@ fun CountryCard(country: Country, onClick: () -> Unit) {
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
         modifier = Modifier.clickable {
             onClick()
-        }.height(320.dp)
+        }.height(240.dp)
     ) {
         Column( modifier = Modifier.fillMaxSize()) {
 
@@ -64,7 +64,7 @@ fun CountryCard(country: Country, onClick: () -> Unit) {
             )
 
 
-            Box(modifier = Modifier.fillMaxWidth().weight(0.45f)){
+            Box(modifier = Modifier.fillMaxWidth().weight(0.35f)){
                 if (painter.state is AsyncImagePainter.State.Loading) {
                     // Display animated loading GIF separately
                     AsyncImage(
@@ -92,7 +92,7 @@ fun CountryCard(country: Country, onClick: () -> Unit) {
 
             Column(
                 verticalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier.weight(.55f).padding(
+                modifier = Modifier.weight(.65f).padding(
                     top = 8.dp,
                     start = 16.dp,
                     end = 8.dp,
