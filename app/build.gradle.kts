@@ -66,6 +66,8 @@ dependencies {
 
     // Coil for images that come from the web service(download, cache and decode)
     implementation("io.coil-kt:coil-compose:2.4.0")
+    // Coil for gifs
+    implementation("io.coil-kt:coil-gif:2.5.0")
 
 
     testImplementation(libs.junit)

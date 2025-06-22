@@ -19,11 +19,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.ImageLoader
+import coil.compose.AsyncImage
+import coil.compose.AsyncImagePainter
+import coil.compose.rememberAsyncImagePainter
+import coil.decode.GifDecoder
+import coil.request.ImageRequest
 import com.example.restcountries.R
 import com.example.restcountries.data.countries
 import com.example.restcountries.model.Country
@@ -39,7 +47,47 @@ fun CountryCard(country: Country, onClick: () -> Unit) {
         }.height(320.dp)
     ) {
         Column( modifier = Modifier.fillMaxSize()) {
+
+            val context = LocalContext.current
+            val painter = rememberAsyncImagePainter(
+                model = ImageRequest.Builder(context)
+                    .data(country.flagUrl)
+                    .crossfade(true)
+                    .placeholder(R.drawable.loading) // Note: GIF won't animate here
+                    .error(R.drawable.error)
+                    .build(),
+                imageLoader = ImageLoader.Builder(context)
+                    .components {
+                        add(GifDecoder.Factory())
+                    }
+                    .build()
+            )
+
+
             Box(modifier = Modifier.fillMaxWidth().weight(0.45f)){
+                if (painter.state is AsyncImagePainter.State.Loading) {
+                    // Display animated loading GIF separately
+                    AsyncImage(
+                        model = ImageRequest.Builder(context)
+                            .data(R.drawable.loading) // Your GIF
+                            .decoderFactory(GifDecoder.Factory())
+                            .build(),
+                        contentDescription = "Loading...",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier.fillMaxSize()
+                    )
+                }
+
+                AsyncImage(
+                    model = ImageRequest.Builder(context)
+                        .data(country.flagUrl)
+                        .crossfade(true)
+                        .error(R.drawable.error)
+                        .build(),
+                    contentDescription = country.name,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.fillMaxSize()
+                )
             }
 
             Column(
