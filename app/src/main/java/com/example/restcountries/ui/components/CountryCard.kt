@@ -64,7 +64,7 @@ fun CountryCard(country: Country, onClick: () -> Unit) {
             )
 
 
-            Box(modifier = Modifier.fillMaxWidth().weight(0.35f)){
+            Box(modifier = Modifier.fillMaxWidth().weight(0.45f)){
                 if (painter.state is AsyncImagePainter.State.Loading) {
                     // Display animated loading GIF separately
                     AsyncImage(
@@ -91,8 +91,8 @@ fun CountryCard(country: Country, onClick: () -> Unit) {
             }
 
             Column(
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier.weight(.65f).padding(
+                verticalArrangement = Arrangement.spacedBy(4.dp),
+                modifier = Modifier.weight(.55f).padding(
                     top = 8.dp,
                     start = 16.dp,
                     end = 8.dp,
