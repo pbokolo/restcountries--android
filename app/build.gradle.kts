@@ -64,6 +64,9 @@ dependencies {
     // The core engine for serialization/deserialization.
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
 
+    // Coil for images that come from the web service(download, cache and decode)
+    implementation("io.coil-kt:coil-compose:2.4.0")
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
