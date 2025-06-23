@@ -79,7 +79,9 @@ fun App(){
                 }
             }
 
-            DataLoadingStates.Error.name -> ErrorScreen(message = uiState.errorMessage)
+            DataLoadingStates.Error.name -> ErrorScreen(message = uiState.errorMessage, onRetry = {
+                viewModel.getCountries()
+            })
 
         }
 
