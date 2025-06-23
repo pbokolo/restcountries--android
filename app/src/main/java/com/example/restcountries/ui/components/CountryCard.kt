@@ -66,16 +66,7 @@ fun CountryCard(country: Country, onClick: () -> Unit) {
 
             Box(modifier = Modifier.fillMaxWidth().weight(0.45f)){
                 if (painter.state is AsyncImagePainter.State.Loading) {
-                    /*// Display animated loading GIF separately
-                    AsyncImage(
-                        model = ImageRequest.Builder(context)
-                            .data(R.drawable.loading) // Your GIF
-                            .decoderFactory(GifDecoder.Factory())
-                            .build(),
-                        contentDescription = "Loading...",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier.fillMaxSize()
-                    )*/
+
                     AnimatedGifImage(
                         id = R.drawable.loading,
                         description = "Loading...",

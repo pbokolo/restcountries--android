@@ -10,12 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
-import coil.decode.GifDecoder
-import coil.request.ImageRequest
 import com.example.restcountries.R
 import com.example.restcountries.ui.components.AnimatedGifImage
 
@@ -30,15 +25,7 @@ fun ErrorScreen(message: String){
             verticalArrangement = Arrangement.spacedBy(8.dp)
 
         ) {
-            /*AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(R.drawable.app_error) // Your GIF
-                    .decoderFactory(GifDecoder.Factory())
-                    .build(),
-                contentDescription = "Loading...",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.size(120.dp)
-            )*/
+
             AnimatedGifImage(
                 id = R.drawable.app_error,
                 description = "Error",
