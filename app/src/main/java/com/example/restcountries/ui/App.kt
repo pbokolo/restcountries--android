@@ -43,7 +43,7 @@ fun App(){
     // Observes the back stack entry as a state
     val backStackEntry by navController.currentBackStackEntryAsState()
 
-    val title = if(backStackEntry?.destination?.route == Routes.List.name) stringResource(R.string.app_name) else "Country"
+    val title = if(backStackEntry?.destination?.route == Routes.List.name) stringResource(R.string.app_name) else if(backStackEntry?.destination?.route == Routes.Country.name) uiState.selectedCountry?.name ?: "" else ""
 
     Scaffold(
         topBar = {
