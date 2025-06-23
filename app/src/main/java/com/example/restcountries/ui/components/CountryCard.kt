@@ -64,7 +64,7 @@ fun CountryCard(country: Country, onClick: () -> Unit) {
             )
 
 
-            Box(modifier = Modifier.fillMaxWidth().weight(0.45f)){
+            /*Box(modifier = Modifier.fillMaxWidth().weight(0.45f)){
                 if (painter.state is AsyncImagePainter.State.Loading) {
 
                     AnimatedGifImage(
@@ -84,7 +84,13 @@ fun CountryCard(country: Country, onClick: () -> Unit) {
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxSize()
                 )
-            }
+            }*/
+
+            AsyncImg(
+                url = country.flagUrl,
+                description = country.name,
+                modifier = Modifier.fillMaxWidth().weight(.45f)
+            )
 
             Column(
                 verticalArrangement = Arrangement.spacedBy(4.dp),
