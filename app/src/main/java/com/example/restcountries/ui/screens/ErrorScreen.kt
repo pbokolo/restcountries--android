@@ -17,6 +17,7 @@ import coil.compose.AsyncImage
 import coil.decode.GifDecoder
 import coil.request.ImageRequest
 import com.example.restcountries.R
+import com.example.restcountries.ui.components.AnimatedGifImage
 
 @Composable
 fun ErrorScreen(message: String){
@@ -29,13 +30,18 @@ fun ErrorScreen(message: String){
             verticalArrangement = Arrangement.spacedBy(8.dp)
 
         ) {
-            AsyncImage(
+            /*AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(R.drawable.app_error) // Your GIF
                     .decoderFactory(GifDecoder.Factory())
                     .build(),
                 contentDescription = "Loading...",
                 contentScale = ContentScale.Crop,
+                modifier = Modifier.size(120.dp)
+            )*/
+            AnimatedGifImage(
+                id = R.drawable.app_error,
+                description = "Error",
                 modifier = Modifier.size(120.dp)
             )
 
