@@ -9,8 +9,10 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.restcountries.RestCountriesApplication
 import com.example.restcountries.data.RestCountriesRepository
+import com.example.restcountries.data.countries
 import com.example.restcountries.model.toCountry
 import com.example.restcountries.utils.DataLoadingStates
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -45,10 +47,14 @@ class CountriesVM(private val restCountriesRepo: RestCountriesRepository):  View
             try {
                 _uiState.update { it.copy(dataLoadingState = DataLoadingStates.Loading.name) }
 
-                val countriesDtos = restCountriesRepo.getAll()
-                val countries = countriesDtos.map { it.toCountry() }
+//                val countriesDtos = restCountriesRepo.getAll()
+//                val countries = countriesDtos.map { it.toCountry() }
 
-                _uiState.update { it.copy(dataLoadingState = DataLoadingStates.Ready.name, countriesList = countries) }
+                val countries = countries
+                delay(3000)
+                _uiState.update {
+                    it.copy(dataLoadingState = DataLoadingStates.Ready.name, countriesList = countries)
+                }
 
             }catch (e: IOException){
                 _uiState.update {

@@ -2,7 +2,6 @@ package com.example.restcountries.ui.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -16,7 +15,12 @@ import coil.request.ImageRequest
 import com.example.restcountries.R
 
 @Composable
-fun AsyncImg(url: String, description: String, modifier: Modifier){
+fun AsyncImg(
+    url: String,
+    description: String,
+    contentScale: ContentScale = ContentScale.Crop,
+    modifier: Modifier
+){
 
     val context = LocalContext.current
     val painter = rememberAsyncImagePainter(
@@ -39,7 +43,7 @@ fun AsyncImg(url: String, description: String, modifier: Modifier){
             AnimatedGifImage(
                 id = R.drawable.loading,
                 description = "Loading...",
-                modifier = Modifier.fillMaxSize()
+                modifier = modifier.fillMaxSize()
             )
         }
 
@@ -50,7 +54,7 @@ fun AsyncImg(url: String, description: String, modifier: Modifier){
                 .error(R.drawable.error)
                 .build(),
             contentDescription = description,
-            contentScale = ContentScale.Crop,
+            contentScale = contentScale,
             modifier = Modifier.fillMaxSize()
         )
     }
