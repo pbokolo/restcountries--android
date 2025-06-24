@@ -24,5 +24,6 @@ fun TopAppBar(title: String, canGoBack: Boolean, navUp: () -> Unit){
             }
         }
     }
+
     )
 }
