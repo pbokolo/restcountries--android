@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -30,9 +31,9 @@ fun CountryDetailsScreen(country: Country?) {
                 url = country.flagUrl,
                 description = country.name,
                 contentScale = ContentScale.FillWidth,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().weight(.5f)
             )
-            Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 8.dp)) {
+            Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 8.dp).weight(.6f)) {
                 Text(
                     text = country.name,
                     maxLines = 1,
