@@ -5,12 +5,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -33,17 +35,48 @@ fun App(){
     val viewModel: CountriesVM = viewModel(factory = CountriesVM.Factory)
     val uiState by viewModel.uiState.collectAsState()
     val navController = rememberNavController()
-    val backStackEntry by navController.currentBackStackEntryAsState()
+    //val backStackEntry by navController.currentBackStackEntryAsState()
 
-    val currentRoute = backStackEntry?.destination?.route
+    //val currentRoute = backStackEntry?.destination?.route
 
-    val title = when (currentRoute) {
+    /*val title = when (currentRoute) {
         Routes.List.name -> stringResource(R.string.app_name)
         Routes.Country.name -> uiState.selectedCountry?.name ?: ""
         else -> ""
+    }*/
+
+    Surface(
+        modifier = Modifier.fillMaxSize().safeDrawingPadding().statusBarsPadding()
+    ) {
+
+        when(uiState.dataLoadingState){
+            DataLoadingStates.Loading.name -> LoadingScreen()
+
+            DataLoadingStates.Ready.name -> NavHost(
+                navController = navController,
+                startDestination = Routes.List.name,
+                modifier = Modifier.padding(start = 8.dp, end = 8.dp)
+            ) {
+                composable(route = Routes.List.name){
+                    CountriesListScreen(list = uiState.countriesList, onClick = { i ->
+                        viewModel.setSelectedCountry(i)
+                        navController.navigate(Routes.Country.name)
+                    })
+                }
+
+                composable(route = Routes.Country.name){
+                    CountryDetailsScreen(country = uiState.selectedCountry)
+                }
+            }
+
+            DataLoadingStates.Error.name -> ErrorScreen(message = uiState.errorMessage, onRetry = {
+                viewModel.getCountries()
+            })
+
+        }
     }
 
-    Scaffold(
+    /*Scaffold(
         topBar = {
             TopAppBar(
                 title = title,
@@ -85,7 +118,7 @@ fun App(){
 
 
 
-    }
+    }*/
 
 }
 
