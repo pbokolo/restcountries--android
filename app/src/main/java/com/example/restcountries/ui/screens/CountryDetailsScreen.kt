@@ -4,9 +4,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,27 +22,36 @@ import com.example.restcountries.ui.theme.RestCountriesTheme
 
 @Composable
 fun CountryDetailsScreen(country: Country?) {
-    Column(modifier = Modifier.fillMaxSize()) {
-        if (country == null) {
+    Surface(modifier = Modifier.fillMaxSize()) {
+        if(country == null){
             Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) { }
             Text(text = "No country selected")
-        } else {
-            AsyncImg(
-                url = country.flagUrl,
-                description = country.name,
-                contentScale = ContentScale.FillWidth,
-                modifier = Modifier.fillMaxWidth().weight(.5f)
-            )
-            Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 8.dp).weight(.6f)) {
-                Text(
-                    text = country.name,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    style = MaterialTheme.typography.titleLarge,
+        }else{
+            Column {
+                AsyncImg(
+                    url = country.flagUrl,
+                    description = country.name,
+                    contentScale = ContentScale.FillWidth,
+                    modifier = Modifier.fillMaxWidth().weight(.4f)
                 )
+                Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 8.dp).weight(.6f)) {
+                    Text(
+                        text = country.name,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        style = MaterialTheme.typography.titleLarge,
+                    )
+                }
             }
-
         }
     }
 }
 
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun CountryDetailsScreenPreview(){
+    RestCountriesTheme {
+        CountryDetailsScreen(country = countries[0])
+    }
+}
