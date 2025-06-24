@@ -25,8 +25,7 @@ fun CountriesListScreen(list: List<Country>, onClick: (Int) -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = stringResource(R.string.app_name),
-                canGoBack = false, navUp = {}
+                title = stringResource(R.string.app_name)
             )
         },
         modifier = Modifier
