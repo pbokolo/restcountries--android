@@ -49,7 +49,7 @@ fun App(){
                 }
 
                 composable(route = Routes.Country.name){
-                    CountryDetailsScreen(country = uiState.selectedCountry)
+                    CountryDetailsScreen(country = uiState.selectedCountry, onBackClicked = { navController.navigateUp() })
                 }
             }
 
