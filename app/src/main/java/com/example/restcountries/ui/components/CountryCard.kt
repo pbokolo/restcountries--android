@@ -47,11 +47,7 @@ fun CountryCard(country: Country, onClick: () -> Unit) {
 
             Column(
                 verticalArrangement = Arrangement.spacedBy(4.dp),
-                modifier = Modifier.weight(.55f).padding(
-                    top = 8.dp,
-                    start = 16.dp,
-                    end = 8.dp,
-                    bottom = 8.dp)
+                modifier = Modifier.weight(.55f).padding(8.dp)
             ) {
                 Text(
                     text = country.name,

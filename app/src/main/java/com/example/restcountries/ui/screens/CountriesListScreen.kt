@@ -36,7 +36,7 @@ fun CountriesListScreen(list: List<Country>, onClick: (Int) -> Unit) {
             columns = GridCells.Adaptive(minSize = 160.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.padding(it)
+            modifier = Modifier.padding(it).padding(start = 8.dp, end = 8.dp)
         ) {
             if (!list.isEmpty()) {
                 itemsIndexed(list) { i, c ->

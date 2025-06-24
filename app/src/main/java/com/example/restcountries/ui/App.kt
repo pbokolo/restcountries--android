@@ -1,7 +1,6 @@
 package com.example.restcountries.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Surface
@@ -10,7 +9,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -42,7 +40,6 @@ fun App(){
             DataLoadingStates.Ready.name -> NavHost(
                 navController = navController,
                 startDestination = Routes.List.name,
-                modifier = Modifier.padding(start = 8.dp, end = 8.dp)
             ) {
                 composable(route = Routes.List.name){
                     CountriesListScreen(list = uiState.countriesList, onClick = { i ->
