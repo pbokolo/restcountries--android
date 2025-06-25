@@ -55,7 +55,7 @@ fun CountryDetailsScreen(country: Country?, onBackClicked: () -> Unit) {
                             .size(48.dp)
                             .shadow(elevation = 6.dp, shape = CircleShape, clip = false)
                             .clip(CircleShape)
-                            .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = .85f))
+                            .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = .95f))
                             .align(Alignment.TopStart)
                             .clickable {
                                 onBackClicked()
