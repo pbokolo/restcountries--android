@@ -1,12 +1,17 @@
 package com.example.restcountries.ui.screens
 
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -15,9 +20,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -40,15 +50,13 @@ fun CountryDetailsScreen(country: Country?, onBackClicked: () -> Unit) {
         } else {
             Column {
 
-
                 Box(modifier = Modifier
-                    .weight(.4f)
                     .fillMaxWidth()) {
                     AsyncImg(
                         url = country.flagUrl,
                         description = country.name,
-                        contentScale = ContentScale.FillWidth,
-                        modifier = Modifier.fillMaxSize()
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier.fillMaxWidth().height(240.dp)
                     )
 
                     Box(
@@ -77,37 +85,65 @@ fun CountryDetailsScreen(country: Country?, onBackClicked: () -> Unit) {
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                     modifier = Modifier
                         .padding(start = 16.dp, end = 16.dp, top = 8.dp)
-                        .weight(.6f)
+                        .animateContentSize(
+                            animationSpec = tween(durationMillis = 500)
+                        )
                 ) {
-                    Text(
-                        text = country.name,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                        style = MaterialTheme.typography.titleLarge,
-                    )
-                    CountryDetailText(
-                        text = country.capitalCity,
-                        icon = R.drawable.ic_city,
-                        textStyle = MaterialTheme.typography.bodySmall
-                    )
-                    CountryDetailText(
-                        text = country.region,
-                        icon = R.drawable.ic_region,
-                        textStyle = MaterialTheme.typography.bodySmall
-                    )
 
-                    CountryDetailText(
-                        text = country.population.toString(),
-                        icon = R.drawable.ic_diversity,
-                        textStyle = MaterialTheme.typography.bodySmall
-                    )
+                    var expanded by remember { mutableStateOf(false) }
 
-                    CountryDetailText(
-                        text = country.currency,
-                        icon = R.drawable.ic_currency,
-                        textStyle = MaterialTheme.typography.bodySmall
-                    )
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.clickable{
+                            expanded = !expanded
+                        }
+                    ) {
+                        Text(
+                            text = country.name,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                            style = MaterialTheme.typography.titleLarge,
+                            modifier = Modifier.weight(.8f)
+                        )
 
+                        val rotationAngle by animateFloatAsState(
+                            targetValue = if(expanded) 180f else 0f,
+                            label = "Icon rotation"
+                        )
+
+                        Box{
+                            Icon(
+                                painter = painterResource(R.drawable.ic_expand),
+                                contentDescription = "Expand",
+                                tint = MaterialTheme.colorScheme.surfaceVariant,
+                                modifier = Modifier.rotate(rotationAngle)
+                            )
+                        }
+                    }
+
+                    if(expanded) {
+                        CountryDetailText(
+                            text = country.capitalCity,
+                            icon = R.drawable.ic_city,
+                            textStyle = MaterialTheme.typography.bodyLarge
+                        )
+                        CountryDetailText(
+                            text = country.region,
+                            icon = R.drawable.ic_region,
+                            textStyle = MaterialTheme.typography.bodyLarge
+                        )
+                        CountryDetailText(
+                            text = country.population.toString(),
+                            icon = R.drawable.ic_diversity,
+                            textStyle = MaterialTheme.typography.bodyLarge
+                        )
+                        CountryDetailText(
+                            text = country.currency,
+                            icon = R.drawable.ic_currency,
+                            textStyle = MaterialTheme.typography.bodyLarge
+                        )
+                    }
 
                 }
             }

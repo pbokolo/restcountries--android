@@ -55,10 +55,10 @@ fun CountryCard(country: Country, onClick: () -> Unit) {
                     overflow = TextOverflow.Ellipsis,
                     style = MaterialTheme.typography.titleMedium
                 )
-                CountryDetailText(text = country.capitalCity, icon = R.drawable.ic_city, textStyle = MaterialTheme.typography.bodyMedium)
-                CountryDetailText(text = country.region, icon = R.drawable.ic_region, textStyle = MaterialTheme.typography.bodyMedium)
-                CountryDetailText(text = formatPopulation(country.population), icon = R.drawable.ic_diversity, textStyle = MaterialTheme.typography.bodyMedium)
-                CountryDetailText(text = country.currency, icon = R.drawable.ic_currency, textStyle = MaterialTheme.typography.bodyMedium)
+                CountryDetailText(text = country.capitalCity, icon = R.drawable.ic_city, textStyle = MaterialTheme.typography.bodySmall)
+                CountryDetailText(text = country.region, icon = R.drawable.ic_region, textStyle = MaterialTheme.typography.bodySmall)
+                CountryDetailText(text = formatPopulation(country.population), icon = R.drawable.ic_diversity, textStyle = MaterialTheme.typography.bodySmall)
+                CountryDetailText(text = country.currency, icon = R.drawable.ic_currency, textStyle = MaterialTheme.typography.bodySmall)
             }
         }
 
