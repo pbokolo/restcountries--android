@@ -145,6 +145,8 @@ fun CountryDetailsScreen(country: Country?, onBackClicked: () -> Unit) {
                         )
                     }
 
+                    Text(text = "Neighbors: 10", style = MaterialTheme.typography.bodySmall)
+
                 }
             }
         }
