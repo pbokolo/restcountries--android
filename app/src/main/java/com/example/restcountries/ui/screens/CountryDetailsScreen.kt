@@ -2,6 +2,7 @@ package com.example.restcountries.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -28,6 +29,7 @@ import com.example.restcountries.model.Country
 import com.example.restcountries.ui.components.AsyncImg
 import com.example.restcountries.ui.theme.RestCountriesTheme
 import com.example.restcountries.R
+import com.example.restcountries.ui.components.CountryDetailText
 
 @Composable
 fun CountryDetailsScreen(country: Country?, onBackClicked: () -> Unit) {
@@ -71,9 +73,8 @@ fun CountryDetailsScreen(country: Country?, onBackClicked: () -> Unit) {
                     }
                 }
 
-
-
                 Column(
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
                     modifier = Modifier
                         .padding(start = 16.dp, end = 16.dp, top = 8.dp)
                         .weight(.6f)
@@ -84,6 +85,30 @@ fun CountryDetailsScreen(country: Country?, onBackClicked: () -> Unit) {
                         overflow = TextOverflow.Ellipsis,
                         style = MaterialTheme.typography.titleLarge,
                     )
+                    CountryDetailText(
+                        text = country.capitalCity,
+                        icon = R.drawable.ic_city,
+                        textStyle = MaterialTheme.typography.bodySmall
+                    )
+                    CountryDetailText(
+                        text = country.region,
+                        icon = R.drawable.ic_region,
+                        textStyle = MaterialTheme.typography.bodySmall
+                    )
+
+                    CountryDetailText(
+                        text = country.population.toString(),
+                        icon = R.drawable.ic_diversity,
+                        textStyle = MaterialTheme.typography.bodySmall
+                    )
+
+                    CountryDetailText(
+                        text = country.currency,
+                        icon = R.drawable.ic_currency,
+                        textStyle = MaterialTheme.typography.bodySmall
+                    )
+
+
                 }
             }
         }
